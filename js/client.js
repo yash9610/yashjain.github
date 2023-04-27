@@ -1,4 +1,4 @@
-const socket = io('http://localhost:3000');
+const socket = io('http://localhost:8000');
 
 const form = document.getElementById('send-container');
 const messageInput = document.getElementById('messageInp')
@@ -30,7 +30,12 @@ socket.on('receive', data => {
 });
 
 socket.on('left', name => {
+    if (name) {
+        console.log(`User ${name} left the chat`);
     append(`${name} left the chat`,'right');
+} else {
+    console.log('Error: name is null or undefined');
+}
 });
 
 form.addEventListener('submit', (e)=>{
